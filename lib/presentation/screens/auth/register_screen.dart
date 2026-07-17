@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/auth_provider.dart';
+import '../../../core/theme/app_theme.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -57,6 +58,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                const SizedBox(height: 8),
+                const Icon(Icons.person_add_alt_1, size: 56, color: AppColors.blue),
+                const SizedBox(height: 8),
+                Text(
+                  'Crea tu cuenta',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+                const SizedBox(height: 4),
+                const Text(
+                  'Únete a la red de seguridad de SafeWalk',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: AppColors.textMuted),
+                ),
+                const SizedBox(height: 24),
                 TextFormField(
                   controller: _nameController,
                   decoration: const InputDecoration(

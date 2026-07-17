@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../providers/contacts_provider.dart';
 import '../../../data/models/emergency_contact.dart';
+import '../../../core/theme/app_theme.dart';
 
 class ContactsScreen extends StatefulWidget {
   const ContactsScreen({super.key});
@@ -16,6 +18,17 @@ class _ContactsScreenState extends State<ContactsScreen> {
     super.initState();
     // Se activa la escucha en tiempo real una sola vez.
     context.read<ContactsProvider>().listenToContacts();
+  }
+
+  Future<void> _callContact(BuildContext context, String phone) async {
+    final uri = Uri(scheme: 'tel', path: phone);
+    final launched = await launchUrl(uri);
+
+    if (!launched && context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('No se pudo abrir el marcador telefónico')),
+      );
+    }
   }
 
   void _showAddContactSheet() {
@@ -103,19 +116,44 @@ class _ContactsScreenState extends State<ContactsScreen> {
         onPressed: _showAddContactSheet,
         child: const Icon(Icons.person_add_alt),
       ),
-      body: contactsProvider.contacts.isEmpty
-          ? const Center(
-              child: Padding(
-                padding: EdgeInsets.all(24.0),
-                child: Text(
-                  'Aún no tienes contactos de emergencia.\nToca + para agregar uno.',
-                  textAlign: TextAlign.center,
+      body: Column(
+        children: [
+          Container(
+            width: double.infinity,
+            margin: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: AppColors.blueLight,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: const Row(
+              children: [
+                Icon(Icons.info_outline, color: AppColors.blue),
+                SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    'Estos contactos serán notificados si activas el SOS. El icono verde indica que ya tienen SafeWalk.',
+                    style: TextStyle(color: AppColors.textDark, fontSize: 13),
+                  ),
                 ),
-              ),
-            )
-          : ListView.builder(
-              itemCount: contactsProvider.contacts.length,
-              itemBuilder: (context, index) {
+              ],
+            ),
+          ),
+          Expanded(
+            child: contactsProvider.contacts.isEmpty
+                ? const Center(
+                    child: Padding(
+                      padding: EdgeInsets.all(24.0),
+                      child: Text(
+                        'Aún no tienes contactos de emergencia.\nToca + para agregar uno.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: AppColors.textMuted),
+                      ),
+                    ),
+                  )
+                : ListView.builder(
+                    itemCount: contactsProvider.contacts.length,
+                    itemBuilder: (context, index) {
                 final EmergencyContact contact = contactsProvider.contacts[index];
                 return ListTile(
                   leading: CircleAvatar(
@@ -131,9 +169,14 @@ class _ContactsScreenState extends State<ContactsScreen> {
                           padding: EdgeInsets.only(right: 8),
                           child: Tooltip(
                             message: 'Tiene SafeWalk',
-                            child: Icon(Icons.verified, color: Colors.green, size: 20),
+                            child: Icon(Icons.verified, color: AppColors.green, size: 20),
                           ),
                         ),
+                      IconButton(
+                        icon: const Icon(Icons.call, color: AppColors.green),
+                        tooltip: 'Llamar',
+                        onPressed: () => _callContact(context, contact.phone),
+                      ),
                       IconButton(
                         icon: const Icon(Icons.delete_outline),
                         onPressed: () => context.read<ContactsProvider>().deleteContact(contact.id),
@@ -141,8 +184,11 @@ class _ContactsScreenState extends State<ContactsScreen> {
                     ],
                   ),
                 );
-              },
-            ),
+                    },
+                  ),
+          ),
+        ],
+      ),
     );
   }
 }

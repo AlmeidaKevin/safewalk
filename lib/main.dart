@@ -1,18 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'firebase_options.dart';
 import 'presentation/providers/auth_provider.dart';
 import 'presentation/providers/contacts_provider.dart';
+import 'presentation/providers/sos_provider.dart';
+import 'presentation/providers/incoming_sos_provider.dart';
 import 'presentation/screens/auth/login_screen.dart';
 import 'presentation/screens/home/home_screen.dart';
+import 'core/theme/app_theme.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+
+  // Mantiene visible el splash nativo hasta que lo quitemos manualmente,
+  // en vez de que desaparezca apenas se dibuje el primer frame de Flutter.
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   runApp(const SafeWalkApp());
+
+  // Duracion minima garantizada del splash: 3 segundos, sin importar
+  // que tan rapido haya terminado la inicializacion de arriba.
+  await Future.delayed(const Duration(seconds: 3));
+  FlutterNativeSplash.remove();
 }
 
 class SafeWalkApp extends StatelessWidget {
@@ -24,14 +39,13 @@ class SafeWalkApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => ContactsProvider()),
+        ChangeNotifierProvider(create: (_) => SosProvider()),
+        ChangeNotifierProvider(create: (_) => IncomingSosProvider()),
       ],
       child: MaterialApp(
         title: 'SafeWalk',
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorSchemeSeed: Colors.deepOrange,
-          useMaterial3: true,
-        ),
+        theme: AppTheme.lightTheme,
         home: const AuthGate(),
       ),
     );
