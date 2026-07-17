@@ -39,7 +39,6 @@ Aplicación móvil de seguridad y emergencia desarrollada en Flutter. Permite ac
   </a>
 </p>
 
----
 
 ---
 
