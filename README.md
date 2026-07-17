@@ -1,5 +1,13 @@
 # SafeWalk 🛡️
 
+<p align="center">
+  <a href="https://drive.google.com/file/d/1afa2CBiLf7hWOyM4uORgg6XITDptfxpE/view?usp=sharing">
+    <img src="https://img.shields.io/badge/▶️_Ver_video_de_demostración-2563EB?style=for-the-badge&logoColor=white" alt="Descargar APK" width="400"/>
+  </a>
+</p>
+
+
+
 Aplicación móvil de seguridad y emergencia desarrollada en Flutter. Permite activar una alerta SOS que comparte tu ubicación en tiempo real con tus contactos de emergencia, incluye un chat activo durante la emergencia, notificaciones push, y una función de registro de rutas con seguimiento en vivo.
 
 ## ✨ Funcionalidades
