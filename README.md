@@ -139,9 +139,9 @@ Las reglas de Firestore (`firestore.rules`) restringen el acceso de modo que:
 - Un evento SOS solo es visible para su dueño y los contactos notificados
 - El chat de emergencia solo es accesible mientras la alerta esté activa
 
-## 👤 Autor
 
-**Kevin Almeida** — [@AlmeidaKevin](https://github.com/AlmeidaKevin)
-**Diego Montaluisa** 
-**Pablo Erazo** 
+## 👤 Autor
+**Kevin Almeida** — [@AlmeidaKevin](https://github.com/AlmeidaKevin)  
+**Diego Montaluisa**  
+**Pablo Erazo**  
 **Alessia de los Angeles**
