@@ -142,6 +142,6 @@ Las reglas de Firestore (`firestore.rules`) restringen el acceso de modo que:
 ## 👤 Autor
 
 **Kevin Almeida** — [@AlmeidaKevin](https://github.com/AlmeidaKevin)
-**Diego Montaluisa**
-**Pablo Erazo**
+**Diego Montaluisa** 
+**Pablo Erazo** 
 **Alessia de los Angeles**
