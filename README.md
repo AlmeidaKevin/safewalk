@@ -28,6 +28,19 @@ Aplicación móvil de seguridad y emergencia desarrollada en Flutter. Permite ac
 - **Geolocator** — ubicación en tiempo real
 - **url_launcher** — llamadas telefónicas directas
 
+
+---
+
+## 🎥 Video de demostración
+
+<p align="center">
+  <a href="https://drive.google.com/file/d/1Mn2GrmnkuWInd3zt-fJRekHPNAH-ZC7B/view?usp=sharing">
+    <img src="https://img.shields.io/badge/▶️_Ver_video_de_demostración-2563EB?style=for-the-badge&logoColor=white" alt="Ver video de demostración" width="400"/>
+  </a>
+</p>
+
+---
+
 ---
 
 ## 📸 Capturas de pantalla
