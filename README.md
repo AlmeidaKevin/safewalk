@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://drive.google.com/file/d/1afa2CBiLf7hWOyM4uORgg6XITDptfxpE/view?usp=sharing">
-    <img src="https://img.shields.io/badge/▶️_Ver_video_de_demostración-2563EB?style=for-the-badge&logoColor=white" alt="Descargar APK" width="400"/>
+    <img src="https://img.shields.io/badge/▶️_Descargar_APK-2563EB?style=for-the-badge&logoColor=white" alt="Descargar APK" width="400"/>
   </a>
 </p>
 
